@@ -27,6 +27,17 @@ class FrozenEvaluationIntegrityTests(unittest.TestCase):
             self.assertEqual(metadata["sha256"], digest)
             self.assertEqual(metadata["case_count"], len(load_jsonl(path)))
 
+    def test_private_corpus_hashes_and_counts_match_manifest(self) -> None:
+        # Full annual-report chunks are intentionally excluded from the public
+        # repository. Validate them when available in a local development copy.
+        missing_paths = [
+            ROOT / metadata["path"]
+            for metadata in self.manifest["corpus"]
+            if not (ROOT / metadata["path"]).exists()
+        ]
+        if missing_paths:
+            self.skipTest("copyrighted corpus chunks are not present in this checkout")
+
         for metadata in self.manifest["corpus"]:
             path = ROOT / metadata["path"]
             digest = hashlib.sha256(path.read_bytes()).hexdigest()
