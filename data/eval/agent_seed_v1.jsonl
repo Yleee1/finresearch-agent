@@ -1,0 +1,12 @@
+{"case_id":"a001","question":"宁德时代2024年的电池系统产能利用率是多少？","expected_route":"single","expected_status":"answered","expected_facts":["76.33%"],"relevant_doc_ids":["catl-2024-annual-p0021-c01"]}
+{"case_id":"a002","question":"宁德时代2024年境外收入金额及占营业收入比例是多少？","expected_route":"single","expected_status":"answered","expected_facts":["110,335,509","30.48%"],"relevant_doc_ids":["catl-2024-annual-p0019-c01","catl-2024-annual-p0019-c02"]}
+{"case_id":"a003","question":"截至2024年末，比亚迪新能源汽车业务进入了多少个国家和地区？","expected_route":"single","expected_status":"answered","expected_facts":["6大洲","100多个国家和地区"],"relevant_doc_ids":["byd-2024-annual-p0021-c01"]}
+{"case_id":"a004","question":"比亚迪第五代DM技术的发动机热效率、亏电油耗和综合续航分别是多少？","expected_route":"single","expected_status":"answered","expected_facts":["46.06%","2.9L","2,100"],"relevant_doc_ids":["byd-2024-annual-p0003-c02","byd-2024-annual-p0015-c01"]}
+{"case_id":"a005","question":"宁德时代天恒储能系统的零衰减年限和单箱能量是多少？","expected_route":"single","expected_status":"answered","expected_facts":["5年","6.25MWh"],"relevant_doc_ids":["catl-2024-annual-p0016-c02","catl-2024-annual-p0017-c02"]}
+{"case_id":"a006","question":"对比比亚迪和宁德时代2024年的研发费用，哪家公司更高，各自是多少？","expected_route":"multi","expected_status":"answered","expected_facts":["53,194,745","18,606,756"],"relevant_doc_ids":["byd-2024-annual-p0027-c02","byd-2024-annual-p0145-c01","catl-2024-annual-p0024-c01","catl-2024-annual-p0198-c01"]}
+{"case_id":"a007","question":"比较比亚迪与宁德时代2024年经营活动产生的现金流量净额。","expected_route":"multi","expected_status":"answered","expected_facts":["133,453,873","96,990,345"],"relevant_doc_ids":["byd-2024-annual-p0011-c01","byd-2024-annual-p0034-c01","catl-2024-annual-p0009-c01","catl-2024-annual-p0025-c01"]}
+{"case_id":"a008","question":"宁德时代2024年动力电池和储能电池全球市占率分别是多少？","expected_route":"single","expected_status":"answered","expected_facts":["37.9%","36.5%"],"relevant_doc_ids":["catl-2024-annual-p0012-c01"]}
+{"case_id":"u001","question":"比亚迪2024年研发投入同比增长的直接原因是什么？","expected_route":"single","expected_status":"abstained","expected_facts":[],"relevant_doc_ids":[]}
+{"case_id":"u002","question":"宁德时代2025年电池系统产能利用率是多少？","expected_route":"single","expected_status":"abstained","expected_facts":[],"relevant_doc_ids":[]}
+{"case_id":"u003","question":"宁德时代2024年半导体业务收入是多少？","expected_route":"single","expected_status":"abstained","expected_facts":[],"relevant_doc_ids":[]}
+{"case_id":"u004","question":"比较比亚迪和宁德时代2024年的员工主动离职率。","expected_route":"multi","expected_status":"abstained","expected_facts":[],"relevant_doc_ids":[]}

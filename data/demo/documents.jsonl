@@ -1,0 +1,4 @@
+{"doc_id":"sample-a-rnd","title":"示例公司A研发投入","text":"示例公司A本年度研发投入为120亿元，同比增长18%，研发人员约2万人。","source":"synthetic://company-a#rnd","document_id":"sample-company-a","company":"示例公司A","report_year":2024,"page_start":12,"page_end":12}
+{"doc_id":"sample-a-margin","title":"示例公司A业务毛利率","text":"示例公司A的核心产品业务毛利率为21.6%，同比提高1.2个百分点。","source":"synthetic://company-a#margin","document_id":"sample-company-a","company":"示例公司A","report_year":2024,"page_start":18,"page_end":18}
+{"doc_id":"sample-b-capacity","title":"示例公司B产能情况","text":"示例公司B本年度产能利用率为78.4%，并继续推进海外产能建设。","source":"synthetic://company-b#capacity","document_id":"sample-company-b","company":"示例公司B","report_year":2024,"page_start":21,"page_end":21}
+{"doc_id":"sample-policy","title":"示例行业政策","text":"示例政策支持设备更新，重点包括消费补贴和基础设施建设。","source":"synthetic://policy#update","document_id":"sample-policy","company":"","report_year":2025,"page_start":3,"page_end":3}

@@ -1,0 +1,22 @@
+[
+  {
+    "document_id": "byd-2024-annual",
+    "company": "比亚迪",
+    "report_year": 2024,
+    "title": "比亚迪股份有限公司2024年年度报告",
+    "url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881496.PDF",
+    "local_path": "data/raw/byd_2024_annual_report.pdf",
+    "pages": 290,
+    "sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3"
+  },
+  {
+    "document_id": "catl-2024-annual",
+    "company": "宁德时代",
+    "report_year": 2024,
+    "title": "宁德时代新能源科技股份有限公司2024年年度报告",
+    "url": "https://static.cninfo.com.cn/finalpage/2025-03-15/1222806982.PDF",
+    "local_path": "data/raw/catl_2024_annual_report.pdf",
+    "pages": 229,
+    "sha256": "b4f1713d7b821eb076c102711d177fe942ccc2bc8dd171ae5d7a95799a65b0ad"
+  }
+]

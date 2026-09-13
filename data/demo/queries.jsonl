@@ -1,0 +1,3 @@
+{"query_id":"sample-q1","query":"示例公司A本年度研发投入是多少？","relevant_doc_ids":["sample-a-rnd"]}
+{"query_id":"sample-q2","query":"示例公司A核心产品业务毛利率是多少？","relevant_doc_ids":["sample-a-margin"]}
+{"query_id":"sample-q3","query":"示例政策重点支持哪些方向？","relevant_doc_ids":["sample-policy"]}

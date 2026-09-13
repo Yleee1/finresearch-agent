@@ -1,0 +1,28 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Copyrighted source reports and full derived corpus stay local.
+data/raw/**
+!data/raw/.gitkeep
+data/processed/**
+!data/processed/.gitkeep
+*.pdf
+
+# Keep only compact, non-verbatim public metric summaries.
+results/**
+!results/frozen_eval_v1_summary.json
+!results/retrieval_frozen_v1.json
+!results/rerank_bm25_frozen_v1.json
+!results/rerank_hybrid_frozen_v1.json
+
+*.lock
+
+# Personal learning notes are kept locally; public docs focus on the project.
+docs/PROJECT_BLUEPRINT.md
+docs/day*.md

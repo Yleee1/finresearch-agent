@@ -1,0 +1,28 @@
+{
+  "manifest": "data/eval/frozen_v1_manifest.json",
+  "retrieval_case_count": 40,
+  "retrieval": {
+    "bm25": {"hit_at_5": 0.875, "recall_at_5": 0.8625, "mrr": 0.7133333333, "ndcg_at_5": 0.7413769177, "mean_query_ms": 4.02},
+    "dense": {"hit_at_5": 0.575, "recall_at_5": 0.55, "mrr": 0.455, "ndcg_at_5": 0.4659216552, "mean_query_ms": 3.01},
+    "hybrid": {"hit_at_5": 0.825, "recall_at_5": 0.825, "mrr": 0.6154166667, "ndcg_at_5": 0.66382366, "mean_query_ms": 7.31},
+    "bm25_rerank": {"hit_at_5": 0.95, "recall_at_5": 0.95, "mrr": 0.7591666667, "ndcg_at_5": 0.808953515, "mean_query_ms": 2567.34},
+    "hybrid_rerank": {"hit_at_5": 0.95, "recall_at_5": 0.95, "mrr": 0.7591666667, "ndcg_at_5": 0.808953515, "mean_query_ms": 2339.56}
+  },
+  "agent_case_count": 24,
+  "agent_raw": {
+    "route_accuracy": 0.75,
+    "status_accuracy": 1.0,
+    "mean_fact_coverage": 0.9791666667,
+    "citation_hit_rate": 0.9166666667,
+    "strict_success_rate": 0.625,
+    "grounded_task_success_rate_without_route": 0.875,
+    "mean_end_to_end_seconds": 7.5733916667,
+    "total_llm_calls": 92,
+    "total_tokens": 225852
+  },
+  "notes": [
+    "All figures are from the first completed run after the dataset hashes were frozen.",
+    "The grounded task success rate is a diagnostic derived from status, fact coverage and citation hit; strict success additionally requires the expected route.",
+    "Raw scores are retained even where later review found duplicate valid disclosures or route-label ambiguity."
+  ]
+}

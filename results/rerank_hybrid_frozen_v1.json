@@ -1,0 +1,20 @@
+{
+  "corpus_size": 881,
+  "query_count": 40,
+  "base": "hybrid",
+  "candidate_k": 20,
+  "embedding_model": "BAAI/bge-small-zh-v1.5",
+  "reranker_model": "BAAI/bge-reranker-base",
+  "device": "cpu",
+  "result": {
+    "query_count": 40,
+    "hit_at_k": 0.95,
+    "recall_at_k": 0.95,
+    "mrr": 0.7591666666666667,
+    "ndcg_at_k": 0.8089535150499699,
+    "top_k": 5,
+    "build_seconds": 20.7532,
+    "query_seconds": 93.5823,
+    "mean_query_ms": 2339.56
+  }
+}

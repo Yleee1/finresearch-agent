@@ -1,0 +1,41 @@
+{
+  "corpus_size": 881,
+  "query_count": 40,
+  "model": "BAAI/bge-small-zh-v1.5",
+  "device": "cpu",
+  "results": {
+    "bm25": {
+      "query_count": 40,
+      "hit_at_k": 0.875,
+      "recall_at_k": 0.8625,
+      "mrr": 0.7133333333333334,
+      "ndcg_at_k": 0.7413769176621259,
+      "top_k": 5,
+      "build_seconds": 0.0683,
+      "query_seconds": 0.1607,
+      "mean_query_ms": 4.02
+    },
+    "dense": {
+      "query_count": 40,
+      "hit_at_k": 0.575,
+      "recall_at_k": 0.55,
+      "mrr": 0.45499999999999996,
+      "ndcg_at_k": 0.4659216551762822,
+      "top_k": 5,
+      "build_seconds": 14.4956,
+      "query_seconds": 0.1203,
+      "mean_query_ms": 3.01
+    },
+    "hybrid": {
+      "query_count": 40,
+      "hit_at_k": 0.825,
+      "recall_at_k": 0.825,
+      "mrr": 0.6154166666666667,
+      "ndcg_at_k": 0.6638236600318826,
+      "top_k": 5,
+      "build_seconds": 14.5639,
+      "query_seconds": 0.2924,
+      "mean_query_ms": 7.31
+    }
+  }
+}

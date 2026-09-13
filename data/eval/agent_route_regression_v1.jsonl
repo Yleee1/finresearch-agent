@@ -1,0 +1,2 @@
+{"case_id":"a004","question":"比亚迪第五代DM技术的发动机热效率、亏电油耗和综合续航分别是多少？","expected_route":"single","expected_status":"answered","expected_facts":["46.06%","2.9L","2,100"],"relevant_doc_ids":["byd-2024-annual-p0003-c02","byd-2024-annual-p0015-c01"]}
+{"case_id":"u001","question":"比亚迪2024年研发投入同比增长的直接原因是什么？","expected_route":"single","expected_status":"abstained","expected_facts":[],"relevant_doc_ids":[]}

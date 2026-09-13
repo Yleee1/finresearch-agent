@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "finresearch-agent"
+version = "0.1.0"
+description = "Evaluated retrieval and evidence verification for financial documents"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+ingest = ["PyMuPDF>=1.24"]
+retrieval = ["numpy>=1.26", "sentence-transformers>=3,<6"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+finresearch-eval = "finresearch.cli:main"
+finresearch-ingest = "finresearch.ingest_cli:main"
+finresearch-rerank-eval = "finresearch.rerank_cli:main"
+finresearch-ask = "finresearch.agent_cli:main"
+finresearch-agent-eval = "finresearch.agent_eval_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

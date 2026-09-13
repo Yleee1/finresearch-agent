@@ -1,0 +1,34 @@
+{
+  "version": "frozen_v1",
+  "frozen_at": "2026-09-13",
+  "frozen_before_evaluation": true,
+  "retrieval": {
+    "path": "data/eval/retrieval_frozen_v1.jsonl",
+    "case_count": 40,
+    "sha256": "8d4da80956d7eaba10cf0e390717f3c50a90e509d7a5bef06d4e5953de0e771e"
+  },
+  "agent": {
+    "path": "data/eval/agent_frozen_v1.jsonl",
+    "case_count": 24,
+    "answered_count": 20,
+    "abstained_count": 4,
+    "sha256": "12ef6731fd09e34190502e31ba52db95b8c5d7f02a7187b2f4060d2cd4c077da"
+  },
+  "corpus": [
+    {
+      "path": "data/processed/byd_2024_chunks_v3.jsonl",
+      "chunk_count": 495,
+      "sha256": "55f7bf1a3d7a1d83ac6cad2c9e2478872bc05e56dd595730510b33d404b93d06"
+    },
+    {
+      "path": "data/processed/catl_2024_chunks_v3.jsonl",
+      "chunk_count": 386,
+      "sha256": "4bafd8c992c68c2bba4e7aeff731fb6f4a42d6065770033c803a0262fcddd417"
+    }
+  ],
+  "isolation": {
+    "exact_question_overlap_with_seed": 0,
+    "relevant_chunk_overlap_with_seed": 0
+  },
+  "policy": "The frozen files and labels must not be edited after the first evaluation run. Future tuning requires a new evaluation version."
+}
