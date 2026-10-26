@@ -1,0 +1,22 @@
+{
+  "case_count": 8,
+  "route_accuracy": 0.0,
+  "route_macro_f1": 0.0,
+  "status_accuracy": 0.375,
+  "mean_fact_coverage": 0.25,
+  "citation_hit_rate": 0.375,
+  "citation_precision": 0.375,
+  "citation_recall": 0.375,
+  "claim_support_rate": 1.0,
+  "abstention_precision": 0.2857142857142857,
+  "abstention_recall": 1.0,
+  "abstention_f1": 0.4444444444444445,
+  "mean_second_round_incremental_recall": 0.25,
+  "invalid_second_round_rate": 0.0,
+  "success_rate": 0.0,
+  "retriever": "bm25-rerank",
+  "ablation": "F4",
+  "total_llm_calls": 17,
+  "total_tokens": 48187,
+  "mean_end_to_end_seconds": 11.194425
+}

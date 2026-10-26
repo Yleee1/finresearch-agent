@@ -20,6 +20,19 @@ results/**
 !results/retrieval_frozen_v1.json
 !results/rerank_bm25_frozen_v1.json
 !results/rerank_hybrid_frozen_v1.json
+!results/retrieval_ablation_frozen_v2.json
+!results/bad_cases_frozen_v2.json
+!results/agent_matrix_frozen_v2.json
+!results/agent_bad_cases_frozen_v2.json
+!results/v3/
+!results/v3/*_summary.json
+!results/v3/harness_ablation.json
+!results/v3/run_ledger.jsonl
+!results/v3/bad_cases.json
+!results/v3/upgrade_component_eval.json
+!results/v3/evo_harness_contract.json
+!results/v3/F5_evolution_v3.json
+!results/v3/F5_evolution_ledger.jsonl
 
 *.lock
 

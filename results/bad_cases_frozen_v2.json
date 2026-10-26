@@ -1,0 +1,247 @@
+{
+  "source": "results/retrieval_ablation_frozen_v2.json",
+  "selection": "final unresolved cases first, followed by R0 failures fixed by R2",
+  "bad_case_count": 12,
+  "cases": [
+    {
+      "case_id": "rv2-fr010-o",
+      "category": "table_cross_chunk",
+      "final_variant_passed": false,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 0.0,
+      "r2_slot_coverage": 0.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0273-c01",
+        "byd-2024-annual-p0035-c02",
+        "byd-2024-annual-p0228-c01",
+        "byd-2024-annual-p0127-c01",
+        "byd-2024-annual-p0229-c01",
+        "byd-2024-annual-p0272-c02",
+        "byd-2024-annual-p0274-c01"
+      ],
+      "root_cause": "table_candidate_miss",
+      "recommendation": "The required table evidence is absent from the reranked candidate neighborhood.",
+      "regression_status": "unresolved"
+    },
+    {
+      "case_id": "rv2-fr011-p",
+      "category": "table_cross_chunk",
+      "final_variant_passed": false,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 0.0,
+      "r2_slot_coverage": 0.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0272-c01",
+        "byd-2024-annual-p0014-c02",
+        "byd-2024-annual-p0228-c01",
+        "byd-2024-annual-p0003-c01",
+        "byd-2024-annual-p0229-c01",
+        "byd-2024-annual-p0271-c01",
+        "byd-2024-annual-p0272-c02"
+      ],
+      "root_cause": "table_candidate_miss",
+      "recommendation": "The required table evidence is absent from the reranked candidate neighborhood.",
+      "regression_status": "unresolved"
+    },
+    {
+      "case_id": "rv2-fr028-p",
+      "category": "table_cross_chunk",
+      "final_variant_passed": false,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 0.0,
+      "r2_slot_coverage": 0.0,
+      "r2_retrieved_doc_ids": [
+        "catl-2024-annual-p0019-c01",
+        "catl-2024-annual-p0017-c01",
+        "catl-2024-annual-p0019-c02",
+        "catl-2024-annual-p0015-c01",
+        "catl-2024-annual-p0015-c02",
+        "catl-2024-annual-p0018-c02",
+        "catl-2024-annual-p0016-c02"
+      ],
+      "root_cause": "table_candidate_miss",
+      "recommendation": "The required table evidence is absent from the reranked candidate neighborhood.",
+      "regression_status": "unresolved"
+    },
+    {
+      "case_id": "rv2-fr012-r",
+      "category": "table_cross_chunk",
+      "final_variant_passed": false,
+      "r0_slot_coverage": 1.0,
+      "r1_slot_coverage": 0.0,
+      "r2_slot_coverage": 0.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0026-c01",
+        "byd-2024-annual-p0023-c01",
+        "byd-2024-annual-p0013-c01",
+        "byd-2024-annual-p0025-c02",
+        "byd-2024-annual-p0049-c01",
+        "byd-2024-annual-p0026-c02",
+        "byd-2024-annual-p0022-c02"
+      ],
+      "root_cause": "table_candidate_miss",
+      "recommendation": "The required table evidence is absent from the reranked candidate neighborhood.",
+      "regression_status": "unresolved"
+    },
+    {
+      "case_id": "rv2-cross-sales_expense-5",
+      "category": "cross_company_compare",
+      "final_variant_passed": false,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 0.5,
+      "r2_slot_coverage": 0.5,
+      "r2_retrieved_doc_ids": [
+        "catl-2024-annual-p0197-c02",
+        "catl-2024-annual-p0197-c01",
+        "catl-2024-annual-p0119-c01",
+        "byd-2024-annual-p0153-c01",
+        "byd-2024-annual-p0025-c02",
+        "catl-2024-annual-p0198-c01",
+        "catl-2024-annual-p0196-c02"
+      ],
+      "root_cause": "cross_company_incomplete",
+      "recommendation": "One company remains missing after a single retrieval pass.",
+      "regression_status": "unresolved"
+    },
+    {
+      "case_id": "rv2-cross-dividend-1",
+      "category": "cross_company_compare",
+      "final_variant_passed": false,
+      "r0_slot_coverage": 0.5,
+      "r1_slot_coverage": 0.0,
+      "r2_slot_coverage": 0.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0069-c02",
+        "catl-2024-annual-p0059-c01",
+        "catl-2024-annual-p0058-c01",
+        "byd-2024-annual-p0069-c01",
+        "catl-2024-annual-p0059-c02",
+        "byd-2024-annual-p0070-c01",
+        "catl-2024-annual-p0058-c02"
+      ],
+      "root_cause": "cross_company_incomplete",
+      "recommendation": "One company remains missing after a single retrieval pass.",
+      "regression_status": "unresolved"
+    },
+    {
+      "case_id": "rv2-fr006-o",
+      "category": "single_fact",
+      "final_variant_passed": true,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 1.0,
+      "r2_slot_coverage": 1.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0005-c01",
+        "byd-2024-annual-p0069-c02",
+        "byd-2024-annual-p0069-c01",
+        "byd-2024-annual-p0049-c01",
+        "byd-2024-annual-p0269-c01",
+        "byd-2024-annual-p0004-c02",
+        "byd-2024-annual-p0006-c01"
+      ],
+      "root_cause": "ranking_error",
+      "recommendation": "BM25 candidate contains useful evidence but lexical rank is too low; reranker fixes it.",
+      "regression_status": "fixed_by_r2"
+    },
+    {
+      "case_id": "rv2-fr008-p",
+      "category": "table_cross_chunk",
+      "final_variant_passed": true,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 1.0,
+      "r2_slot_coverage": 1.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0022-c02",
+        "byd-2024-annual-p0002-c01",
+        "byd-2024-annual-p0013-c02",
+        "byd-2024-annual-p0049-c01",
+        "byd-2024-annual-p0013-c01",
+        "byd-2024-annual-p0022-c01",
+        "byd-2024-annual-p0023-c01"
+      ],
+      "root_cause": "ranking_error",
+      "recommendation": "BM25 candidate contains useful evidence but lexical rank is too low; reranker fixes it.",
+      "regression_status": "fixed_by_r2"
+    },
+    {
+      "case_id": "rv2-fr009-o",
+      "category": "table_cross_chunk",
+      "final_variant_passed": true,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 1.0,
+      "r2_slot_coverage": 1.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0022-c02",
+        "byd-2024-annual-p0013-c01",
+        "byd-2024-annual-p0023-c01",
+        "byd-2024-annual-p0023-c02",
+        "byd-2024-annual-p0028-c01",
+        "byd-2024-annual-p0022-c01",
+        "byd-2024-annual-p0012-c02"
+      ],
+      "root_cause": "ranking_error",
+      "recommendation": "BM25 candidate contains useful evidence but lexical rank is too low; reranker fixes it.",
+      "regression_status": "fixed_by_r2"
+    },
+    {
+      "case_id": "rv2-fr015-p",
+      "category": "table_cross_chunk",
+      "final_variant_passed": true,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 1.0,
+      "r2_slot_coverage": 1.0,
+      "r2_retrieved_doc_ids": [
+        "byd-2024-annual-p0027-c01",
+        "byd-2024-annual-p0026-c01",
+        "byd-2024-annual-p0049-c01",
+        "byd-2024-annual-p0014-c02",
+        "byd-2024-annual-p0002-c01",
+        "byd-2024-annual-p0026-c02",
+        "byd-2024-annual-p0027-c02"
+      ],
+      "root_cause": "ranking_error",
+      "recommendation": "BM25 candidate contains useful evidence but lexical rank is too low; reranker fixes it.",
+      "regression_status": "fixed_by_r2"
+    },
+    {
+      "case_id": "rv2-fr031-o",
+      "category": "table_cross_chunk",
+      "final_variant_passed": true,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 1.0,
+      "r2_slot_coverage": 1.0,
+      "r2_retrieved_doc_ids": [
+        "catl-2024-annual-p0024-c01",
+        "catl-2024-annual-p0197-c02",
+        "catl-2024-annual-p0197-c01",
+        "catl-2024-annual-p0119-c01",
+        "catl-2024-annual-p0121-c01",
+        "catl-2024-annual-p0023-c02",
+        "catl-2024-annual-p0024-c02"
+      ],
+      "root_cause": "ranking_error",
+      "recommendation": "BM25 candidate contains useful evidence but lexical rank is too low; reranker fixes it.",
+      "regression_status": "fixed_by_r2"
+    },
+    {
+      "case_id": "rv2-fr040-p",
+      "category": "table_cross_chunk",
+      "final_variant_passed": true,
+      "r0_slot_coverage": 0.0,
+      "r1_slot_coverage": 1.0,
+      "r2_slot_coverage": 1.0,
+      "r2_retrieved_doc_ids": [
+        "catl-2024-annual-p0121-c01",
+        "catl-2024-annual-p0122-c01",
+        "catl-2024-annual-p0009-c01",
+        "byd-2024-annual-p0236-c01",
+        "catl-2024-annual-p0228-c01",
+        "catl-2024-annual-p0120-c02",
+        "catl-2024-annual-p0121-c02"
+      ],
+      "root_cause": "ranking_error",
+      "recommendation": "BM25 candidate contains useful evidence but lexical rank is too low; reranker fixes it.",
+      "regression_status": "fixed_by_r2"
+    }
+  ]
+}

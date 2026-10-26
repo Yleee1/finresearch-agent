@@ -1,0 +1,451 @@
+{
+  "source": "results/agent_matrix_frozen_v2.json",
+  "bad_case_count": 12,
+  "contains_report_text": false,
+  "cases": [
+    {
+      "case_id": "av2-fa016-o",
+      "root_cause": "answer_critic_over_abstention",
+      "recommendation": "Calibrate deterministic and model critics separately; retain the rejected claim ledger.",
+      "outcomes": {
+        "R3": {
+          "route": "cross_section_multi_hop",
+          "status": "answered",
+          "iterations": 1,
+          "success": true,
+          "route_correct": true,
+          "citation_recall": 1.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "cross_section_multi_hop",
+          "status": "answered",
+          "iterations": 1,
+          "success": true,
+          "route_correct": true,
+          "citation_recall": 1.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R5": {
+          "route": "cross_section_multi_hop",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": 0.0,
+          "invalid_second_round": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa001-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa004-o",
+      "root_cause": "planner_route_mismatch",
+      "recommendation": "Add route-specific hard negatives and score planning independently from answer quality.",
+      "outcomes": {
+        "R3": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R5": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa020-r",
+      "root_cause": "false_abstention",
+      "recommendation": "Inspect slot matching and verifier thresholds before increasing retrieval rounds.",
+      "outcomes": {
+        "R3": {
+          "route": "cross_company_compare",
+          "status": "answered",
+          "iterations": 1,
+          "success": true,
+          "route_correct": true,
+          "citation_recall": 0.5,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "cross_company_compare",
+          "status": "answered",
+          "iterations": 1,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R5": {
+          "route": "cross_company_compare",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": 0.0,
+          "invalid_second_round": 0.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa002-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa003-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa005-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa007-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "single_fact",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": true,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa008-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa009-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa010-r",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "av2-fa011-o",
+      "root_cause": "reflection_no_incremental_evidence",
+      "recommendation": "Tighten follow-up queries or skip reflection when the first-pass candidate set is saturated.",
+      "outcomes": {
+        "R3": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 1,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 0.0
+        },
+        "R4": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        },
+        "R5": {
+          "route": "same_section_multi_slot",
+          "status": "abstained",
+          "iterations": 2,
+          "success": false,
+          "route_correct": false,
+          "citation_recall": 0.0,
+          "claim_support_rate": null,
+          "invalid_second_round": 1.0
+        }
+      }
+    }
+  ]
+}

@@ -39,6 +39,9 @@ def reciprocal_rank_fusion(
             report_year=representatives[doc_id].report_year,
             page_start=representatives[doc_id].page_start,
             page_end=representatives[doc_id].page_end,
+            section_path=representatives[doc_id].section_path,
+            prev_chunk_id=representatives[doc_id].prev_chunk_id,
+            next_chunk_id=representatives[doc_id].next_chunk_id,
         )
         for rank, doc_id in enumerate(ordered_ids[:top_k], start=1)
     ]

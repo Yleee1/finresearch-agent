@@ -1,0 +1,17 @@
+{
+  "source_run": "results/v3/F0_frozen.jsonl",
+  "dataset_sha256": "e4c3153c5354f94633f55f4b7f0d490d0fce1913715eb3ceab69e5f2c27f7b59",
+  "note": "All ten answerable frozen cases failed; the two expected abstentions passed.",
+  "cases": [
+    {"case_id":"fv3-f001","root_cause":"route_under_decomposition","evidence_found":true,"detail":"Gold page 9 was retrieved, but the planner labeled a two-field request single_fact and verification rejected the evidence."},
+    {"case_id":"fv3-f002","root_cause":"route_under_decomposition","evidence_found":true,"detail":"Gold page 11 was retrieved; capacity and growth fields were not accepted as a complete slot set."},
+    {"case_id":"fv3-f003","root_cause":"answerability_false_negative","evidence_found":false,"detail":"A directly disclosed historical recycling statistic was classified as unanswerable before retrieval."},
+    {"case_id":"fv3-f004","root_cause":"route_under_decomposition","evidence_found":true,"detail":"Both certification pages were retrieved but the two requested certifications were planned as single_fact."},
+    {"case_id":"fv3-f005","root_cause":"table_evidence_false_negative","evidence_found":true,"detail":"The product table containing revenue and gross margin was retrieved but verifier marked evidence insufficient."},
+    {"case_id":"fv3-f006","root_cause":"verifier_false_negative","evidence_found":true,"detail":"The exact 1.34亿元 disclosure was retrieved but no answer was emitted."},
+    {"case_id":"fv3-f007","root_cause":"table_alignment_false_negative","evidence_found":true,"detail":"The vehicle category table was retrieved; row/column association was not accepted."},
+    {"case_id":"fv3-f008","root_cause":"multi_slot_verifier_false_negative","evidence_found":true,"detail":"The rear-steering angle and cost reduction appeared in the retrieved gold chunk."},
+    {"case_id":"fv3-f009","root_cause":"multi_slot_verifier_false_negative","evidence_found":true,"detail":"Both charging-time facts appeared in the retrieved adjacent chunks."},
+    {"case_id":"fv3-f010","root_cause":"duplicate_disclosure_ranking_and_verification","evidence_found":true,"detail":"The gold asset-composition page was retrieved after duplicate financial-statement pages, then rejected."}
+  ]
+}

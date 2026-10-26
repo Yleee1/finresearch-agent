@@ -1,0 +1,17 @@
+{
+  "contract": "official evo-harness AgentWorkspace/Observer",
+  "source_repository": "https://github.com/A-EVO-Lab/a-evolve",
+  "source_ref": "release/evo-harness",
+  "source_commit": "3c7c7b8c62a3f07da1d4407aa03f0ca079954bcf",
+  "pipeline": "F5_context_to_harness",
+  "input": "results/v3/F5_frozen.jsonl",
+  "observation_count": 12,
+  "observer_batch_sha256": "7ba0b4d32e8bfacdfa15c625eae0ab80ea91ad55331917429b89a081ffd769c3",
+  "contract_smoke_passed": true,
+  "evolution_executed": true,
+  "cycles_completed": 1,
+  "accepted_cycle": 1,
+  "compiler": "local Qwen3-1.7B-4bit via MLX",
+  "frozen_used_for_selection": false,
+  "note": "Custom FinResearch context-to-harness pipeline built on the official AgentWorkspace/Observer contract; it is not one of the five upstream benchmark pipelines."
+}

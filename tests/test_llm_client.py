@@ -17,11 +17,29 @@ class JsonParsingTests(unittest.TestCase):
         self.assertEqual(_extract_json('```json\n{"ok": true}\n```'), {"ok": True})
 
     def test_rejects_non_object(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             _extract_json("[1, 2]")
 
 
 class DeepSeekResearchLLMTests(unittest.TestCase):
+    def test_parses_v3_research_plan(self):
+        llm = DeepSeekResearchLLM(QueueClient([{
+            "answerability": "unknown",
+            "route": "same_section_multi_slot",
+            "entities": ["宁德时代"],
+            "periods": ["2024"],
+            "evidence_slots": [
+                {"slot_id": "revenue", "company": "宁德时代", "period": "2024", "metric": "营业收入", "depends_on": []},
+                {"slot_id": "profit", "company": "宁德时代", "period": "2024", "metric": "净利润", "depends_on": []},
+            ],
+            "dependencies": [],
+            "retrieval_queries": ["宁德时代 2024 营业收入 净利润"],
+        }]))
+        plan = llm.plan_structured("宁德时代2024年收入和利润")
+        self.assertEqual(plan.route, "same_section_multi_slot")
+        self.assertEqual(plan.periods, ("2024",))
+        self.assertEqual(len(plan.evidence_slots), 2)
+
     def test_parses_all_three_structured_stages(self):
         client = QueueClient(
             [

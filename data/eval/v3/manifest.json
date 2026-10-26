@@ -1,0 +1,27 @@
+{
+  "version": "finresearch_agent_v3",
+  "created_at": "2026-10-25",
+  "splits": {
+    "dev": {
+      "path": "data/eval/v3/dev_v3.jsonl",
+      "count": 8,
+      "sha256": "6ea13b1eb660ab350bcff00c4ec99a4191399f3312e7c8f1a6349f405359fc39"
+    },
+    "heldout": {
+      "path": "data/eval/v3/heldout_v3.jsonl",
+      "count": 8,
+      "sha256": "46fba4096780cb5eb1aea7173ef47619aa26a4bd921920b6f5910278e6a753e3"
+    },
+    "frozen": {
+      "path": "data/eval/v3/frozen_v3.jsonl",
+      "count": 12,
+      "sha256": "e4c3153c5354f94633f55f4b7f0d490d0fce1913715eb3ceab69e5f2c27f7b59"
+    }
+  },
+  "isolation": {
+    "exact_question_overlap_between_v3_splits": 0,
+    "gold_doc_id_overlap_with_v2_frozen": 0,
+    "note": "V3 uses previously unused gold chunks. The set is author-curated synthetic evaluation data and has not yet received independent second-reviewer sign-off."
+  },
+  "freeze_rule": "Dev may be inspected; heldout gold is evaluator-only; frozen is run once after configuration selection and never used for candidate generation."
+}

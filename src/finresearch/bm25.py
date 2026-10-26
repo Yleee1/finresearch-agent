@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from collections import Counter
 import math
+from collections import Counter
 
 from .schemas import Document, SearchResult
 from .tokenization import tokenize
@@ -75,6 +75,9 @@ class BM25Retriever:
                     report_year=document.report_year,
                     page_start=document.page_start,
                     page_end=document.page_end,
+                    section_path=document.section_path,
+                    prev_chunk_id=document.prev_chunk_id,
+                    next_chunk_id=document.next_chunk_id,
                 )
             )
         return results

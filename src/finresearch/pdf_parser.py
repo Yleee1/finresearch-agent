@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
-from pathlib import Path
 import re
 from collections import Counter
+from dataclasses import dataclass
+from pathlib import Path
 
 from .schemas import Document
-
 
 _WHITESPACE = re.compile(r"[ \t\u3000]+")
 _PAGE_NUMBER = re.compile(r"^(?:第\s*)?[—-]?\s*\d+\s*[—-]?(?:\s*页)?$")
@@ -229,7 +228,35 @@ def chunk_page_texts(
                     page_end=page.page_number,
                 )
             )
-    return chunks
+    linked: list[Document] = []
+    for index, chunk in enumerate(chunks):
+        previous = chunks[index - 1] if index > 0 else None
+        following = chunks[index + 1] if index + 1 < len(chunks) else None
+        linked.append(
+            Document(
+                doc_id=chunk.doc_id,
+                title=chunk.title,
+                text=chunk.text,
+                source=chunk.source,
+                document_id=chunk.document_id,
+                company=chunk.company,
+                report_year=chunk.report_year,
+                section_path=chunk.section_path,
+                page_start=chunk.page_start,
+                page_end=chunk.page_end,
+                prev_chunk_id=(
+                    previous.doc_id
+                    if previous is not None and previous.document_id == chunk.document_id
+                    else ""
+                ),
+                next_chunk_id=(
+                    following.doc_id
+                    if following is not None and following.document_id == chunk.document_id
+                    else ""
+                ),
+            )
+        )
+    return linked
 
 
 def parse_and_chunk_pdf(

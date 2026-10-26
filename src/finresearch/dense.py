@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Protocol, Sequence
+from collections.abc import Sequence
+from typing import Protocol
 
 import numpy as np
 
@@ -78,6 +79,9 @@ class DenseRetriever:
                 report_year=self.documents[index].report_year,
                 page_start=self.documents[index].page_start,
                 page_end=self.documents[index].page_end,
+                section_path=self.documents[index].section_path,
+                prev_chunk_id=self.documents[index].prev_chunk_id,
+                next_chunk_id=self.documents[index].next_chunk_id,
             )
             for rank, index in enumerate(indices, start=1)
         ]

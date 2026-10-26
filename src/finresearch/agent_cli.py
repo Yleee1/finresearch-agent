@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
 import json
+from dataclasses import asdict
 from pathlib import Path
 from time import perf_counter
 
 from .agent import ResearchAgent
 from .bm25 import BM25Retriever
+from .budgets import ResearchBudget
 from .dense import DenseRetriever
 from .hybrid import HybridRetriever
 from .io import load_documents
@@ -27,6 +28,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--candidate-k", type=int, default=20)
     parser.add_argument("--max-iterations", type=int, default=2)
+    parser.add_argument("--max-sub-queries", type=int, default=4)
+    parser.add_argument("--max-evidence-chunks", type=int, default=12)
+    parser.add_argument("--max-context-tokens", type=int, default=8000)
+    parser.add_argument("--max-llm-calls", type=int, default=8)
+    parser.add_argument("--max-neighbor-chunks", type=int, default=2)
+    parser.add_argument("--no-neighbor-expansion", action="store_true")
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--env-file", default=".env")
     parser.add_argument("--output")
@@ -66,6 +73,15 @@ def main() -> None:
         llm,
         top_k=args.top_k,
         max_iterations=args.max_iterations,
+        budget=ResearchBudget(
+            max_retrieval_rounds=args.max_iterations,
+            max_sub_queries=args.max_sub_queries,
+            max_evidence_chunks=args.max_evidence_chunks,
+            max_context_tokens=args.max_context_tokens,
+            max_llm_calls=args.max_llm_calls,
+            max_neighbor_chunks=args.max_neighbor_chunks,
+        ),
+        expand_neighbors=not args.no_neighbor_expansion,
     ).run(args.question)
     payload = asdict(result)
     payload["llm_usage"] = {

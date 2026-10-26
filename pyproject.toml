@@ -12,6 +12,8 @@ dependencies = []
 [project.optional-dependencies]
 ingest = ["PyMuPDF>=1.24"]
 retrieval = ["numpy>=1.26", "sentence-transformers>=3,<6"]
+observability = ["langfuse>=4,<5"]
+evo = ["evo-harness @ git+https://github.com/A-EVO-Lab/a-evolve.git@3c7c7b8c62a3f07da1d4407aa03f0ca079954bcf"]
 dev = ["pytest>=8", "ruff>=0.6"]
 
 [project.scripts]
@@ -20,6 +22,14 @@ finresearch-ingest = "finresearch.ingest_cli:main"
 finresearch-rerank-eval = "finresearch.rerank_cli:main"
 finresearch-ask = "finresearch.agent_cli:main"
 finresearch-agent-eval = "finresearch.agent_eval_cli:main"
+finresearch-v2-data = "finresearch.v2_data:main"
+finresearch-retrieval-v2 = "finresearch.retrieval_v2_cli:main"
+finresearch-agent-ablation = "finresearch.agent_ablation_cli:main"
+finresearch-demo = "finresearch.web_demo:main"
+finresearch-agent-report-v2 = "finresearch.agent_report_v2:main"
+finresearch-upgrade-eval = "finresearch.upgrade_eval_cli:main"
+finresearch-evo-export = "finresearch.evo_harness_bridge:main"
+finresearch-evo-f5 = "finresearch.evo_f5:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

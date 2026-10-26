@@ -1,0 +1,22 @@
+{
+  "case_count": 12,
+  "route_accuracy": 0.75,
+  "route_macro_f1": 0.37777777777777777,
+  "status_accuracy": 0.16666666666666666,
+  "mean_fact_coverage": 0.16666666666666666,
+  "citation_hit_rate": 0.16666666666666666,
+  "citation_precision": 0.16666666666666666,
+  "citation_recall": 0.16666666666666666,
+  "claim_support_rate": null,
+  "abstention_precision": 0.16666666666666666,
+  "abstention_recall": 1.0,
+  "abstention_f1": 0.2857142857142857,
+  "mean_second_round_incremental_recall": 0.08333333333333333,
+  "invalid_second_round_rate": 0.08333333333333333,
+  "success_rate": 0.08333333333333333,
+  "retriever": "bm25-rerank",
+  "ablation": "F5",
+  "total_llm_calls": 23,
+  "total_tokens": 60128,
+  "mean_end_to_end_seconds": 12.6758
+}

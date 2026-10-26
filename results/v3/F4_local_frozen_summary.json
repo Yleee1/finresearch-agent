@@ -1,0 +1,22 @@
+{
+  "case_count": 12,
+  "route_accuracy": 0.08333333333333333,
+  "route_macro_f1": 0.045454545454545456,
+  "status_accuracy": 0.16666666666666666,
+  "mean_fact_coverage": 0.16666666666666666,
+  "citation_hit_rate": 0.16666666666666666,
+  "citation_precision": 0.16666666666666666,
+  "citation_recall": 0.16666666666666666,
+  "claim_support_rate": 0.0,
+  "abstention_precision": 0.18181818181818182,
+  "abstention_recall": 1.0,
+  "abstention_f1": 0.3076923076923077,
+  "mean_second_round_incremental_recall": 0.5833333333333334,
+  "invalid_second_round_rate": 0.16666666666666666,
+  "success_rate": 0.0,
+  "retriever": "bm25-rerank",
+  "ablation": "F4",
+  "total_llm_calls": 36,
+  "total_tokens": 128966,
+  "mean_end_to_end_seconds": 27.798875
+}

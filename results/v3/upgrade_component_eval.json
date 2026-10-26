@@ -1,0 +1,88 @@
+{
+  "suite": "v3_upgrade_component_eval",
+  "scope": "deterministic component checks; not end-to-end frozen task success",
+  "case_count": 11,
+  "success_rate": 1.0,
+  "by_component": {
+    "harness": {
+      "case_count": 1,
+      "success_rate": 1.0
+    },
+    "memory": {
+      "case_count": 2,
+      "success_rate": 1.0
+    },
+    "planner": {
+      "case_count": 4,
+      "success_rate": 1.0
+    },
+    "retrieval_gate": {
+      "case_count": 3,
+      "success_rate": 1.0
+    },
+    "trace": {
+      "case_count": 1,
+      "success_rate": 1.0
+    }
+  },
+  "records": [
+    {
+      "case_id": "planner_1",
+      "component": "planner",
+      "passed": true
+    },
+    {
+      "case_id": "planner_2",
+      "component": "planner",
+      "passed": true
+    },
+    {
+      "case_id": "planner_3",
+      "component": "planner",
+      "passed": true
+    },
+    {
+      "case_id": "planner_4",
+      "component": "planner",
+      "passed": true
+    },
+    {
+      "case_id": "gate_1",
+      "component": "retrieval_gate",
+      "passed": true,
+      "stop_reason": null
+    },
+    {
+      "case_id": "gate_2",
+      "component": "retrieval_gate",
+      "passed": true,
+      "stop_reason": "near_duplicate_query"
+    },
+    {
+      "case_id": "gate_3",
+      "component": "retrieval_gate",
+      "passed": true,
+      "stop_reason": "no_missing_slots"
+    },
+    {
+      "case_id": "memory_activation_gate",
+      "component": "memory",
+      "passed": true
+    },
+    {
+      "case_id": "memory_search",
+      "component": "memory",
+      "passed": true
+    },
+    {
+      "case_id": "protected_scorer",
+      "component": "harness",
+      "passed": true
+    },
+    {
+      "case_id": "trace_redaction",
+      "component": "trace",
+      "passed": true
+    }
+  ]
+}

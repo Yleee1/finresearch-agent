@@ -1,4 +1,5 @@
 import unittest
+from typing import ClassVar
 
 import numpy as np
 
@@ -9,7 +10,7 @@ from finresearch.schemas import Document
 
 
 class FakeEncoder:
-    vectors = {
+    vectors: ClassVar[dict[str, list[float]]] = {
         "汽车毛利率": [1.0, 0.0],
         "利润表现": [1.0, 0.0],
         "电池产能": [0.0, 1.0],

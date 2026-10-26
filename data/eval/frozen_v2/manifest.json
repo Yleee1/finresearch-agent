@@ -1,0 +1,37 @@
+{
+  "retrieval": {
+    "file": "retrieval_frozen_v2.jsonl",
+    "sha256": "2a31b7fcbb3dddefb38caf4bcfbded1f074f32eae3d46bdb91fba05b39bc6c58",
+    "case_count": 128,
+    "category_distribution": {
+      "cross_company_compare": 28,
+      "same_section_multi_slot": 8,
+      "single_fact": 43,
+      "table_cross_chunk": 49
+    },
+    "review_status": "independent_second_review_completed_user_attested",
+    "review_attestation_date": "2026-10-11",
+    "review_note": "Completion was attested by the project owner; reviewer identity and private review notes are not stored in the repository.",
+    "limitations": [
+      "Robustness variants share semantic gold with V1 and are not 128 independent facts."
+    ]
+  },
+  "agent": {
+    "file": "agent_frozen_v2.jsonl",
+    "sha256": "b00e53685080b7c7b864ab6c8e1f80d81146bfcd96c0540944f606320beb19b1",
+    "case_count": 74,
+    "category_distribution": {
+      "cross_company_compare": 16,
+      "cross_section_multi_hop": 2,
+      "out_of_scope": 8,
+      "single_fact": 30,
+      "unanswerable": 18
+    },
+    "review_status": "independent_second_review_completed_user_attested",
+    "review_attestation_date": "2026-10-11",
+    "review_note": "Completion was attested by the project owner; reviewer identity and private review notes are not stored in the repository.",
+    "limitations": [
+      "Robustness variants share semantic gold with V1 and are not 128 independent facts."
+    ]
+  }
+}

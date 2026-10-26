@@ -1,0 +1,29 @@
+{
+  "suite": "finresearch_v3_F0_F5",
+  "dataset_manifest": "data/eval/v3/manifest.json",
+  "groups": {
+    "F0": {"dev_strict_success":0.375,"heldout_strict_success":0.125,"frozen_strict_success":0.1666666667,"heldout_route_accuracy":0.625,"heldout_invalid_second_round_rate":0.0,"heldout_tokens":26521,"decision":"selected_for_one_time_frozen"},
+    "F1": {"dev_strict_success":0.375,"heldout_strict_success":0.125,"heldout_route_accuracy":0.625,"heldout_invalid_second_round_rate":0.0,"heldout_tokens":34460,"decision":"rejected_no_quality_gain_higher_cost"},
+    "F2": {"dev_strict_success":0.375,"heldout_strict_success":0.0,"heldout_route_accuracy":0.625,"heldout_invalid_second_round_rate":0.875,"heldout_tokens":61500,"decision":"rejected_regression"},
+    "F3": {"dev_strict_success":0.375,"heldout_strict_success":0.0,"heldout_route_accuracy":0.625,"heldout_invalid_second_round_rate":0.75,"heldout_tokens":56420,"decision":"rejected_memory_hit_without_task_gain"},
+    "F4": {"dev_strict_success":0.375,"heldout_strict_success":0.0,"heldout_route_accuracy":0.625,"heldout_invalid_second_round_rate":0.75,"heldout_tokens":50477,"decision":"rejected_no_task_gain"},
+    "F5": {
+      "status": "completed_custom_pipeline",
+      "solver_condition": "local Qwen3-1.7B-4bit via MLX; not comparable to the DeepSeek F0-F4 rows",
+      "cycles_completed": 1,
+      "accepted_cycle": 1,
+      "dev_strict_success": 0.25,
+      "heldout_strict_success": 0.25,
+      "frozen_strict_success": 0.0833333333,
+      "frozen_route_accuracy": 0.75,
+      "frozen_invalid_second_round_rate": 0.0833333333,
+      "frozen_tokens": 60128,
+      "same_solver_f4_frozen_strict_success": 0.0,
+      "same_solver_f4_frozen_route_accuracy": 0.0833333333,
+      "same_solver_f4_frozen_invalid_second_round_rate": 0.1666666667,
+      "same_solver_f4_frozen_tokens": 128966,
+      "decision": "accepted_on_dev_and_heldout; frozen_not_used_for_selection"
+    }
+  },
+  "warning": "V3 is author-curated, small, and not second-reviewed. F0-F4 use DeepSeek while the F5 same-solver baseline and candidate use local Qwen3-1.7B; never compare across those model conditions. The frozen results do not replace V2 resume metrics."
+}

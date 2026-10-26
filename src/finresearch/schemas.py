@@ -15,6 +15,8 @@ class Document:
     section_path: str = ""
     page_start: int | None = None
     page_end: int | None = None
+    prev_chunk_id: str = ""
+    next_chunk_id: str = ""
 
 
 @dataclass(frozen=True)
@@ -37,3 +39,6 @@ class SearchResult:
     report_year: int | None = None
     page_start: int | None = None
     page_end: int | None = None
+    section_path: str = ""
+    prev_chunk_id: str = ""
+    next_chunk_id: str = ""

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Protocol, Sequence
+from collections.abc import Sequence
+from typing import Protocol
 
 import numpy as np
 
@@ -81,6 +82,9 @@ class RerankRetriever:
                 report_year=candidate.report_year,
                 page_start=candidate.page_start,
                 page_end=candidate.page_end,
+                section_path=candidate.section_path,
+                prev_chunk_id=candidate.prev_chunk_id,
+                next_chunk_id=candidate.next_chunk_id,
             )
             for rank, (candidate, score) in enumerate(ordered, start=1)
         ]

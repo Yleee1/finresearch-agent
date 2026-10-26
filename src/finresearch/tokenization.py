@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import re
 
-
 _ASCII_TOKEN = re.compile(r"[A-Za-z0-9]+(?:[._-][A-Za-z0-9]+)*%?")
 _CJK_RUN = re.compile(r"[\u3400-\u9fff]+")
 
