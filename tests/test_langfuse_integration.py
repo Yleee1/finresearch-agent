@@ -1,4 +1,5 @@
 import unittest
+from contextlib import nullcontext
 
 from finresearch.observability import OptionalLangfuseSink
 from finresearch.trace_events import TraceEvent
@@ -28,6 +29,36 @@ class LangfuseIntegrationTests(unittest.TestCase):
                 trace_id="t", run_id="r", dataset_split="dev_v3",
                 harness_version="v", stage="planner",
             ))
+
+    def test_stages_from_one_run_share_native_langfuse_trace(self):
+        class RecordingClient:
+            def __init__(self):
+                self.calls = []
+
+            @staticmethod
+            def create_trace_id(*, seed):
+                return f"native:{seed}"
+
+            def start_as_current_observation(self, **kwargs):
+                self.calls.append(kwargs)
+                return nullcontext()
+
+        client = RecordingClient()
+        sink = OptionalLangfuseSink(client, enabled=True)
+        for stage in ("planner", "retrieval", "result"):
+            sink.emit(TraceEvent(
+                trace_id="trace-one-run",
+                run_id="run-1",
+                dataset_split="interactive",
+                harness_version="v3-dev-0",
+                stage=stage,
+            ))
+
+        trace_ids = {
+            call["trace_context"]["trace_id"]
+            for call in client.calls
+        }
+        self.assertEqual(trace_ids, {"native:trace-one-run"})
 
 
 if __name__ == "__main__":

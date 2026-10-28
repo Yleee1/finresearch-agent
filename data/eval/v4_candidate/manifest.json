@@ -1,0 +1,58 @@
+{
+  "status": "candidate_pending_independent_review",
+  "note": "Gold semantics and questions are inherited from frozen V2; only document ids were manually migrated to the V4 corpus. This is a paired development comparison, not a new independent frozen benchmark.",
+  "mapping": {
+    "file": "gold_mapping_v4.json",
+    "sha256": "fe3221f28e35dd9c35163269b2e48b47cbc3e2cc956b605c19e73c4abbf78502"
+  },
+  "source_cases": {
+    "retrieval": {
+      "file": "data/eval/frozen_v2/retrieval_frozen_v2.jsonl",
+      "sha256": "2a31b7fcbb3dddefb38caf4bcfbded1f074f32eae3d46bdb91fba05b39bc6c58"
+    },
+    "agent": {
+      "file": "data/eval/frozen_v2/agent_frozen_v2.jsonl",
+      "sha256": "b00e53685080b7c7b864ab6c8e1f80d81146bfcd96c0540944f606320beb19b1"
+    }
+  },
+  "v4_corpora": [
+    {
+      "file": "data/processed/byd_2024_chunks_v4.jsonl",
+      "sha256": "cc60032d09a7991ca3cba916016f668b9f1a028b4c6487aea47d502457056518"
+    },
+    {
+      "file": "data/processed/catl_2024_chunks_v4.jsonl",
+      "sha256": "1eb3a982e456a2951a17d52a6e1a4f2310c766c54dff973f0d0e9a91b35ffb79"
+    }
+  ],
+  "outputs": {
+    "retrieval": {
+      "file": "retrieval_v4_candidate.jsonl",
+      "sha256": "3eb65f5469ee9d4fdbdc65d94eb2ef5c55a7d9da976e5f945f66c20406979ce5",
+      "case_count": 128,
+      "category_distribution": {
+        "cross_company_compare": 28,
+        "same_section_multi_slot": 8,
+        "single_fact": 43,
+        "table_cross_chunk": 49
+      }
+    },
+    "agent": {
+      "file": "agent_v4_candidate.jsonl",
+      "sha256": "fdb81410bfbdaed36e1b0bb346824df405f1fb81de3f62be2d34ebc53c1922a3",
+      "case_count": 74,
+      "category_distribution": {
+        "cross_company_compare": 16,
+        "cross_section_multi_hop": 2,
+        "out_of_scope": 8,
+        "single_fact": 30,
+        "unanswerable": 18
+      }
+    },
+    "audit": {
+      "file": "migration_audit.jsonl",
+      "sha256": "6f03a41a77182d09b7f2a795e550313808b030a5b2077804d85a005fd658a7b0",
+      "row_count": 60
+    }
+  }
+}

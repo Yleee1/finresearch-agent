@@ -31,6 +31,11 @@ class EvidenceItem:
     retrieval_round: int = 1
     duplicate_group: str = ""
     contains_untrusted_instruction: bool = False
+    chunk_type: str = "text"
+    table_id: str = ""
+    table_header: tuple[str, ...] = ()
+    row_start: int | None = None
+    row_end: int | None = None
 
 
 def contains_untrusted_instruction(text: str) -> bool:
@@ -146,6 +151,11 @@ class EvidencePackBuilder:
             retrieval_round=retrieval_round,
             duplicate_group=_normalized_duplicate_key(result.text),
             contains_untrusted_instruction=contains_untrusted_instruction(result.text),
+            chunk_type=result.chunk_type,
+            table_id=result.table_id,
+            table_header=result.table_header,
+            row_start=result.row_start,
+            row_end=result.row_end,
         )
 
     def _expand_neighbors(
@@ -181,6 +191,11 @@ class EvidencePackBuilder:
                     section_path=neighbor.section_path,
                     prev_chunk_id=neighbor.prev_chunk_id,
                     next_chunk_id=neighbor.next_chunk_id,
+                    chunk_type=neighbor.chunk_type,
+                    table_id=neighbor.table_id,
+                    table_header=neighbor.table_header,
+                    row_start=neighbor.row_start,
+                    row_end=neighbor.row_end,
                 )
                 by_id[neighbor_id] = self._from_result(
                     result,
@@ -233,6 +248,11 @@ def pack_to_search_results(pack: EvidencePack) -> list[SearchResult]:
             page_start=item.page,
             page_end=item.page,
             section_path=item.section,
+            chunk_type=item.chunk_type,
+            table_id=item.table_id,
+            table_header=item.table_header,
+            row_start=item.row_start,
+            row_end=item.row_end,
         )
         for index, item in enumerate(pack.items, 1)
     ]

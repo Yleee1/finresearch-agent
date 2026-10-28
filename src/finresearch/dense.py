@@ -82,6 +82,11 @@ class DenseRetriever:
                 section_path=self.documents[index].section_path,
                 prev_chunk_id=self.documents[index].prev_chunk_id,
                 next_chunk_id=self.documents[index].next_chunk_id,
+                chunk_type=self.documents[index].chunk_type,
+                table_id=self.documents[index].table_id,
+                table_header=self.documents[index].table_header,
+                row_start=self.documents[index].row_start,
+                row_end=self.documents[index].row_end,
             )
             for rank, index in enumerate(indices, start=1)
         ]

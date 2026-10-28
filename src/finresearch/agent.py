@@ -193,6 +193,11 @@ class ResearchAgent:
                 input_refs=tuple(str(item) for item in refs),
                 output_summary=dict(summary or {}),
                 latency_ms=latency_ms,
+                token_usage={
+                    field: max(usage_delta(field), 0)
+                    for field in ("prompt_tokens", "completion_tokens", "total_tokens")
+                },
+                model=str(getattr(client, "model", "")),
                 error_code=error,
             ))
 

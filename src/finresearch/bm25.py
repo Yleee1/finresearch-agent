@@ -78,6 +78,11 @@ class BM25Retriever:
                     section_path=document.section_path,
                     prev_chunk_id=document.prev_chunk_id,
                     next_chunk_id=document.next_chunk_id,
+                    chunk_type=document.chunk_type,
+                    table_id=document.table_id,
+                    table_header=document.table_header,
+                    row_start=document.row_start,
+                    row_end=document.row_end,
                 )
             )
         return results

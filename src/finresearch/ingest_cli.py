@@ -18,6 +18,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--overlap-chars", type=int, default=120)
     parser.add_argument("--strategy", choices=("fixed", "semantic"), default="fixed")
     parser.add_argument("--clean-margins", action="store_true")
+    parser.add_argument(
+        "--structure-aware-tables",
+        action="store_true",
+        help="extract tables separately, split them by complete row groups, and repeat headers",
+    )
     return parser
 
 
@@ -34,6 +39,7 @@ def main() -> None:
         overlap_chars=args.overlap_chars,
         strategy=args.strategy,
         clean_margins=args.clean_margins,
+        structure_aware_tables=args.structure_aware_tables,
     )
     write_documents(args.output, documents)
     print(f"wrote {len(documents)} chunks to {args.output}")

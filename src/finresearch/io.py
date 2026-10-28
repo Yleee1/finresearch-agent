@@ -21,7 +21,12 @@ def _read_jsonl(path: str | Path) -> list[dict]:
 
 
 def load_documents(path: str | Path) -> list[Document]:
-    return [Document(**record) for record in _read_jsonl(path)]
+    documents: list[Document] = []
+    for record in _read_jsonl(path):
+        if "table_header" in record:
+            record["table_header"] = tuple(record["table_header"])
+        documents.append(Document(**record))
+    return documents
 
 
 def load_queries(path: str | Path) -> list[QueryCase]:

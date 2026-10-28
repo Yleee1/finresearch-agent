@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import threading
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from time import time
 from typing import Any, Protocol
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -28,6 +31,8 @@ class TraceEvent:
 
 class TraceSink(Protocol):
     def emit(self, event: TraceEvent) -> None: ...
+
+    def flush(self) -> None: ...
 
 
 def prompt_hash(text: str) -> str:
@@ -60,7 +65,35 @@ class JSONLTraceSink:
         with self._lock, self.path.open("a", encoding="utf-8") as handle:
             handle.write(encoded + "\n")
 
+    def flush(self) -> None:
+        return None
+
+
+class FanoutTraceSink:
+    """Emit each redacted event to multiple optional observability backends."""
+
+    def __init__(self, *sinks: TraceSink) -> None:
+        self.sinks = tuple(sinks)
+
+    def emit(self, event: TraceEvent) -> None:
+        for sink in self.sinks:
+            try:
+                sink.emit(event)
+            # Trace export must never change the research result.
+            except Exception:
+                logger.exception("Optional trace sink failed")
+
+    def flush(self) -> None:
+        for sink in self.sinks:
+            try:
+                sink.flush()
+            except Exception:
+                logger.exception("Optional trace sink flush failed")
+
 
 class NullTraceSink:
     def emit(self, event: TraceEvent) -> None:
+        return None
+
+    def flush(self) -> None:
         return None

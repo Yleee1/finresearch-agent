@@ -42,6 +42,11 @@ def reciprocal_rank_fusion(
             section_path=representatives[doc_id].section_path,
             prev_chunk_id=representatives[doc_id].prev_chunk_id,
             next_chunk_id=representatives[doc_id].next_chunk_id,
+            chunk_type=representatives[doc_id].chunk_type,
+            table_id=representatives[doc_id].table_id,
+            table_header=representatives[doc_id].table_header,
+            row_start=representatives[doc_id].row_start,
+            row_end=representatives[doc_id].row_end,
         )
         for rank, doc_id in enumerate(ordered_ids[:top_k], start=1)
     ]

@@ -85,6 +85,11 @@ class RerankRetriever:
                 section_path=candidate.section_path,
                 prev_chunk_id=candidate.prev_chunk_id,
                 next_chunk_id=candidate.next_chunk_id,
+                chunk_type=candidate.chunk_type,
+                table_id=candidate.table_id,
+                table_header=candidate.table_header,
+                row_start=candidate.row_start,
+                row_end=candidate.row_end,
             )
             for rank, (candidate, score) in enumerate(ordered, start=1)
         ]

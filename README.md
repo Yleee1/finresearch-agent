@@ -75,6 +75,32 @@ cd finresearch-agent
 ./.venv/bin/python -m pytest -q
 ```
 
+生成结构感知候选语料。该模式将正文按语义分块，将可解析表格按完整行组切分，
+在每个表格子块中重复表头，并写入 `table_id`、页码和行范围。输出使用新的
+chunk ID，不能直接套用 V3 冻结集的 gold ID：
+
+```bash
+./.venv/bin/finresearch-ingest \
+  --pdf data/raw/byd_2024_annual_report.pdf \
+  --output data/processed/byd_2024_chunks_v4.jsonl \
+  --document-id byd-2024-annual --title 比亚迪2024年报 \
+  --company 比亚迪 --year 2024 \
+  --strategy semantic --clean-margins --structure-aware-tables
+```
+
+生成候选 gold ID 迁移文件并验证每个新 ID 确实存在：
+
+```bash
+PYTHONPATH=src ./.venv/bin/python -m finresearch.v4_data \
+  --documents data/processed/byd_2024_chunks_v4.jsonl \
+              data/processed/catl_2024_chunks_v4.jsonl \
+  --output-dir data/eval/v4_candidate
+```
+
+V3/V4 配对检索实验的配置、真实指标、回归样本和结论见
+[`docs/V4_TABLE_CHUNKING_EVAL.md`](docs/V4_TABLE_CHUNKING_EVAL.md)。V4 当前是
+`candidate_pending_independent_review`，未覆盖 V3 冻结主线。
+
 V3 核心升级验收（无模型、无网络）：
 
 ```bash

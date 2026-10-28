@@ -3,7 +3,7 @@ from __future__ import annotations
 import math
 import re
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 from .schemas import Document
@@ -18,6 +18,22 @@ _NUMBERISH = re.compile(r"^[\d,.$%+\-–—~～/：:（）()]+$")
 class PageText:
     page_number: int
     text: str
+
+
+@dataclass(frozen=True)
+class PageTable:
+    page_number: int
+    table_index: int
+    rows: tuple[tuple[str, ...], ...]
+    bbox: tuple[float, float, float, float] = (0.0, 0.0, 0.0, 0.0)
+    page_height: float = 0.0
+
+
+@dataclass(frozen=True)
+class StructuredPage:
+    page_number: int
+    text: str
+    tables: tuple[PageTable, ...] = ()
 
 
 def normalize_text(text: str) -> str:
@@ -80,6 +96,117 @@ def extract_pdf_pages(path: str | Path) -> list[PageText]:
                 if cleaned:
                     text_blocks.append(cleaned)
             pages.append(PageText(page_number=page_index + 1, text="\n".join(text_blocks)))
+    return pages
+
+
+def _normalize_cell(value: object) -> str:
+    if value is None:
+        return ""
+    return normalize_text(str(value)).replace("\n", " ").strip()
+
+
+def _normalize_table_rows(rows: list[list[object]]) -> tuple[tuple[str, ...], ...]:
+    normalized = [[_normalize_cell(cell) for cell in row] for row in rows]
+    normalized = [row for row in normalized if any(row)]
+    if not normalized:
+        return ()
+
+    width = max(len(row) for row in normalized)
+    rectangular = [row + [""] * (width - len(row)) for row in normalized]
+    nonempty_columns = [
+        index for index in range(width) if any(row[index] for row in rectangular)
+    ]
+    return tuple(
+        tuple(row[index] for index in nonempty_columns) for row in rectangular
+    )
+
+
+def _is_usable_table(rows: tuple[tuple[str, ...], ...]) -> bool:
+    """Reject layout false positives while keeping ordinary financial tables."""
+
+    if len(rows) < 2 or len(rows[0]) < 2:
+        return False
+    nonempty_cells = [cell for row in rows for cell in row if cell]
+    if len(nonempty_cells) < 4:
+        return False
+    # PyMuPDF may treat a large prose region as a one-cell table. Such regions
+    # are safer in the prose chunker than in a row-oriented table chunk.
+    return max(map(len, nonempty_cells), default=0) <= 600
+
+
+def _block_belongs_to_table(
+    block_bbox: tuple[float, float, float, float],
+    table_bbox: tuple[float, float, float, float],
+) -> bool:
+    x0, y0, x1, y1 = block_bbox
+    tx0, ty0, tx1, ty1 = table_bbox
+    center_x = (x0 + x1) / 2
+    center_y = (y0 + y1) / 2
+    return tx0 <= center_x <= tx1 and ty0 <= center_y <= ty1
+
+
+def extract_structured_pdf_pages(path: str | Path) -> list[StructuredPage]:
+    """Extract prose and usable tables separately without duplicating table text."""
+
+    try:
+        import pymupdf
+    except ImportError as exc:
+        raise RuntimeError(
+            "PDF ingestion requires PyMuPDF. Install with: pip install -e '.[ingest]'"
+        ) from exc
+
+    pdf_path = Path(path)
+    if not pdf_path.is_file():
+        raise FileNotFoundError(pdf_path)
+
+    pages: list[StructuredPage] = []
+    with pymupdf.open(pdf_path) as pdf:
+        for page_index, page in enumerate(pdf):
+            page_number = page_index + 1
+            extracted_tables: list[PageTable] = []
+            table_bboxes: list[tuple[float, float, float, float]] = []
+            try:
+                detected = page.find_tables().tables
+            except (AttributeError, RuntimeError, ValueError):
+                detected = []
+
+            for table_index, table in enumerate(detected, start=1):
+                rows = _normalize_table_rows(table.extract())
+                if not _is_usable_table(rows):
+                    continue
+                bbox = tuple(float(value) for value in table.bbox)
+                extracted_tables.append(
+                    PageTable(
+                        page_number,
+                        table_index,
+                        rows,
+                        bbox,  # type: ignore[arg-type]
+                        float(page.rect.height),
+                    )
+                )
+                table_bboxes.append(bbox)  # type: ignore[arg-type]
+
+            text_blocks: list[str] = []
+            for block in page.get_text("blocks", sort=True):
+                if block[6] != 0:
+                    continue
+                block_bbox = tuple(float(value) for value in block[:4])
+                if any(
+                    _block_belongs_to_table(block_bbox, bbox)  # type: ignore[arg-type]
+                    for bbox in table_bboxes
+                ):
+                    continue
+                cleaned = normalize_block_text(block[4])
+                if cleaned:
+                    text_blocks.append(cleaned)
+
+            pages.append(
+                StructuredPage(
+                    page_number=page_number,
+                    text="\n".join(text_blocks),
+                    tables=tuple(extracted_tables),
+                )
+            )
     return pages
 
 
@@ -259,12 +386,235 @@ def chunk_page_texts(
     return linked
 
 
+def _escape_markdown_cell(value: str) -> str:
+    return value.replace("|", "\\|")
+
+
+def _render_table(header: tuple[str, ...], rows: list[tuple[str, ...]]) -> str:
+    width = len(header)
+
+    def render(row: tuple[str, ...]) -> str:
+        padded = row + ("",) * (width - len(row))
+        return "| " + " | ".join(_escape_markdown_cell(cell) for cell in padded[:width]) + " |"
+
+    output = [render(header), "| " + " | ".join("---" for _ in header) + " |"]
+    output.extend(render(row) for row in rows)
+    return "\n".join(output)
+
+
+def _pack_table_rows(
+    header: tuple[str, ...],
+    data_rows: tuple[tuple[str, ...], ...],
+    max_chars: int,
+) -> list[tuple[int, int, str]]:
+    """Pack whole rows and repeat the header in every emitted table chunk."""
+
+    if not data_rows:
+        return [(0, 0, _render_table(header, []))]
+
+    packed: list[tuple[int, int, str]] = []
+    current: list[tuple[str, ...]] = []
+    start_row = 1
+    for row_number, row in enumerate(data_rows, start=1):
+        candidate = current + [row]
+        if current and len(_render_table(header, candidate)) > max_chars:
+            packed.append((start_row, row_number - 1, _render_table(header, current)))
+            current = [row]
+            start_row = row_number
+        else:
+            current = candidate
+    if current:
+        packed.append((start_row, start_row + len(current) - 1, _render_table(header, current)))
+    return packed
+
+
+def _table_signature(header: tuple[str, ...]) -> tuple[str, ...]:
+    return tuple(re.sub(r"\s+", "", cell).lower() for cell in header)
+
+
+def _link_table_chunks(chunks: list[Document]) -> list[Document]:
+    grouped: dict[str, list[Document]] = {}
+    for chunk in chunks:
+        grouped.setdefault(chunk.table_id, []).append(chunk)
+
+    linked: list[Document] = []
+    for table_chunks in grouped.values():
+        ordered = sorted(
+            table_chunks,
+            key=lambda item: (item.page_start or 0, item.row_start or 0, item.doc_id),
+        )
+        for index, chunk in enumerate(ordered):
+            linked.append(
+                replace(
+                    chunk,
+                    prev_chunk_id=ordered[index - 1].doc_id if index else "",
+                    next_chunk_id=(
+                        ordered[index + 1].doc_id if index + 1 < len(ordered) else ""
+                    ),
+                )
+            )
+    return linked
+
+
+def chunk_structured_pages(
+    pages: list[StructuredPage],
+    *,
+    document_id: str,
+    title: str,
+    company: str,
+    report_year: int,
+    source: str,
+    max_chars: int = 800,
+    overlap_chars: int = 120,
+    strategy: str = "semantic",
+) -> list[Document]:
+    """Chunk prose semantically and tables by complete row groups."""
+
+    prose_chunks = chunk_page_texts(
+        [PageText(page.page_number, page.text) for page in pages],
+        document_id=document_id,
+        title=title,
+        company=company,
+        report_year=report_year,
+        source=source,
+        max_chars=max_chars,
+        overlap_chars=overlap_chars,
+        strategy=strategy,
+    )
+
+    table_chunks: list[Document] = []
+    table_counter = 0
+    recent_signatures: dict[tuple[str, ...], tuple[int, str]] = {}
+    recent_layouts: list[
+        tuple[
+            int,
+            str,
+            tuple[str, ...],
+            tuple[float, float, float, float],
+            float,
+        ]
+    ] = []
+    for page in pages:
+        continued_table_ids: set[str] = set()
+        for table in page.tables:
+            first_row = table.rows[0]
+            width = len(first_row)
+            previous_layout = next(
+                (
+                    layout
+                    for layout in reversed(recent_layouts)
+                    if layout[0] == page.page_number - 1
+                    and layout[1] not in continued_table_ids
+                    and layout[4] > 0
+                    and layout[3][3] >= layout[4] * 0.85
+                    and abs(layout[3][0] - table.bbox[0]) <= 25
+                    and abs(layout[3][2] - table.bbox[2]) <= 25
+                ),
+                None,
+            )
+            continues_from_previous_page = bool(
+                previous_layout is not None
+                and table.page_height > 0
+                and table.bbox[1] <= table.page_height * 0.12
+            )
+            if continues_from_previous_page:
+                assert previous_layout is not None
+                table_id = previous_layout[1]
+                continued_table_ids.add(table_id)
+                header = previous_layout[2]
+                compact_header = tuple(cell for cell in header if cell)
+                if len(header) != width and len(compact_header) == width:
+                    header = compact_header
+                data_rows = table.rows[1:] if first_row == header else table.rows
+            else:
+                header = first_row
+                data_rows = table.rows[1:]
+
+            signature = _table_signature(header)
+            if not continues_from_previous_page:
+                previous = recent_signatures.get(signature)
+                if (
+                    any(signature)
+                    and previous is not None
+                    and previous[0] == page.page_number - 1
+                    and previous[1] not in continued_table_ids
+                ):
+                    table_id = previous[1]
+                else:
+                    table_counter += 1
+                    table_id = f"{document_id}-table-{table_counter:04d}"
+            recent_signatures[signature] = (page.page_number, table_id)
+            recent_layouts.append(
+                (
+                    page.page_number,
+                    table_id,
+                    header,
+                    table.bbox,
+                    table.page_height,
+                )
+            )
+
+            for part_index, (row_start, row_end, text) in enumerate(
+                _pack_table_rows(header, data_rows, max_chars),
+                start=1,
+            ):
+                table_chunks.append(
+                    Document(
+                        doc_id=(
+                            f"{table_id}-p{page.page_number:04d}-part{part_index:02d}"
+                        ),
+                        document_id=document_id,
+                        title=title,
+                        text=text,
+                        source=source,
+                        company=company,
+                        report_year=report_year,
+                        section_path="table",
+                        page_start=page.page_number,
+                        page_end=page.page_number,
+                        chunk_type="table",
+                        table_id=table_id,
+                        table_header=header,
+                        row_start=row_start,
+                        row_end=row_end,
+                    )
+                )
+
+    combined = prose_chunks + _link_table_chunks(table_chunks)
+    return sorted(
+        combined,
+        key=lambda item: (
+            item.page_start or 0,
+            0 if item.chunk_type == "text" else 1,
+            item.doc_id,
+        ),
+    )
+
+
 def parse_and_chunk_pdf(
     path: str | Path,
     *,
     clean_margins: bool = False,
+    structure_aware_tables: bool = False,
     **chunk_options,
 ) -> list[Document]:
+    if structure_aware_tables:
+        structured_pages = extract_structured_pdf_pages(path)
+        if clean_margins:
+            cleaned = remove_repeated_marginal_lines(
+                [PageText(page.page_number, page.text) for page in structured_pages]
+            )
+            cleaned_by_page = {page.page_number: page.text for page in cleaned}
+            structured_pages = [
+                StructuredPage(
+                    page_number=page.page_number,
+                    text=cleaned_by_page[page.page_number],
+                    tables=page.tables,
+                )
+                for page in structured_pages
+            ]
+        return chunk_structured_pages(structured_pages, **chunk_options)
+
     pages = extract_pdf_pages(path)
     if clean_margins:
         pages = remove_repeated_marginal_lines(pages)

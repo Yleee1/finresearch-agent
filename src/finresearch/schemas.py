@@ -17,6 +17,11 @@ class Document:
     page_end: int | None = None
     prev_chunk_id: str = ""
     next_chunk_id: str = ""
+    chunk_type: str = "text"
+    table_id: str = ""
+    table_header: tuple[str, ...] = ()
+    row_start: int | None = None
+    row_end: int | None = None
 
 
 @dataclass(frozen=True)
@@ -42,3 +47,8 @@ class SearchResult:
     section_path: str = ""
     prev_chunk_id: str = ""
     next_chunk_id: str = ""
+    chunk_type: str = "text"
+    table_id: str = ""
+    table_header: tuple[str, ...] = ()
+    row_start: int | None = None
+    row_end: int | None = None
